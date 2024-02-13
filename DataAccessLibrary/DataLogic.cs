@@ -2,6 +2,7 @@
 
 using DataAccessLibrary.Models;
 using DataAccessLibrary.SQLDataAccess;
+using DataAccessLibrary.SQLiteDataAccess;
 
 using Microsoft.Extensions.Configuration;
 
@@ -22,7 +23,13 @@ namespace DataAccessLibrary
 					_connectionString = _configuration.GetConnectionString("SQLServer");
 					_crud = new SqlCrud(_connectionString);
 					break;
+				case DBTYPES.SQLite:
+					_connectionString = _configuration.GetConnectionString("SQLite");
+					_crud = new SQLiteCrud(_connectionString);
+					break;
 				default:
+					_connectionString = _configuration.GetConnectionString("SQLServer");
+					_crud = new SqlCrud(_connectionString);
 					break;
 			}
 		}
